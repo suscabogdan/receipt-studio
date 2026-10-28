@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "electron": "44.9.1",
-    "electron-builder": "26.8.1"
+    "electron-builder": "26.18.0"
   },
   "build": {
     "appId": "com.receiptstudio.desktop",

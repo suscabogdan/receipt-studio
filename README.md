@@ -17,7 +17,7 @@ npm start
 
 `npm start` opens the desktop app. `npm run dev` and `npm run run` are aliases for the same command. No API keys, database, account, environment file or web server are needed.
 
-The first `npm ci` needs internet and downloads the Electron runtime for your operating system. Install development dependencies too, because Electron is a development dependency. Do not use `npm ci --omit=dev` or copy another machine's `node_modules` folder. After installation the app works offline. On later launches, run `npm start` again. Restart the app after editing the source.
+Dependency installation and the first launch need internet. Electron 44 downloads its native runtime on first use, so the first `npm start` can take longer. Install development dependencies too, because Electron is a development dependency. Do not use `npm ci --omit=dev` or copy another machine's `node_modules` folder. Once dependencies and the runtime are installed, the app works offline. On later launches, run `npm start` again. Restart the app after editing the source.
 
 This is a desktop app, not a hosted website. Opening `index.html` in a browser provides a preview only, without native PDF export.
 
@@ -32,7 +32,7 @@ Extract or clone the whole repository before using a launcher. Keep the source f
 
 ### macOS and Linux
 
-Use the same `npm ci` and `npm start` commands in a graphical desktop session. npm downloads the native Electron build for the current platform and CPU. On macOS the window can close while the app remains in the Dock; use Quit to end it.
+Use the same `npm ci` and `npm start` commands in a graphical desktop session. Electron downloads its native build for the current platform and CPU on first use. On macOS the window can close while the app remains in the Dock; use Quit to end it.
 
 Linux needs Electron's system libraries. On Ubuntu 24.04, missing-library errors can normally be resolved with:
 
@@ -112,4 +112,4 @@ npm run package:source
 
 `Build-Windows.cmd` runs the core tests and Windows build. Outputs appear under the ignored `release/` directory. The Windows build targets x64 and produces an NSIS installer and a portable ZIP. Both include Electron and need no Node.js installation. They are unsigned and may trigger Windows warnings. No auto-updater, publishing service or signing certificate is configured. Generated installers are not part of this repository, and editing source does not change an existing build until you rebuild it.
 
-`npm run package:source` creates a source-only ZIP using the installed build tools. Electron 44.9.1 and electron-builder 26.8.1 are pinned in the manifest and lockfile.
+`npm run package:source` creates a source-only ZIP using the installed build tools. Electron 44.9.1 and electron-builder 26.18.0 are pinned in the manifest and lockfile.
