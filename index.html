@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Receipt Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Receipt Studio</h1>
+    <button id="export-button" class="button primary" disabled>Export to PDF</button>
+  </header>
+  <main class="workspace">
+    <aside class="editor-panel">
+      <form id="log-form" novalidate>
+        <label for="company">Company</label>
+        <select id="company" name="company"><option value="FINE NAME">FINE NAME</option><option value="VELTO TRANS">VELTO TRANS</option></select>
+        <label for="registration">Registration number</label>
+        <input id="registration" name="registration" type="text" maxlength="18" placeholder="CS-36-VDC" autocomplete="off" spellcheck="false" required>
+        <label for="date">Date</label>
+        <input id="date" name="date" type="date" min="1900-01-01" max="2100-12-31" required>
+        <div class="field-row"><div><label for="startTime">Start time</label><input id="startTime" name="startTime" type="time" value="08:00" required></div><div><label for="endTime">End time</label><input id="endTime" name="endTime" type="time" value="10:00" required></div></div>
+        <fieldset class="sensor-range"><legend>Sensor 1 · °C</legend><div class="field-row"><div><label for="sensor1Min">Min</label><input id="sensor1Min" name="sensor1Min" type="text" inputmode="decimal" value="2" required></div><div><label for="sensor1Max">Max</label><input id="sensor1Max" name="sensor1Max" type="text" inputmode="decimal" value="4" required></div></div></fieldset>
+        <fieldset class="sensor-range"><legend>Sensor 2 · °C</legend><div class="field-row"><div><label for="sensor2Min">Min</label><input id="sensor2Min" name="sensor2Min" type="text" inputmode="decimal" value="-20" required></div><div><label for="sensor2Max">Max</label><input id="sensor2Max" name="sensor2Max" type="text" inputmode="decimal" value="-18" required></div></div></fieldset>
+        <label for="interval">Sampling interval</label>
+        <select id="interval" name="interval"><option value="1">Every 1 minute</option><option value="5">Every 5 minutes</option><option value="10">Every 10 minutes</option><option value="15" selected>Every 15 minutes</option><option value="30">Every 30 minutes</option><option value="60">Every 60 minutes</option></select>
+        <details class="advanced"><summary>Recorder details</summary>
+          <label for="model">Model</label><input id="model" name="model" value="TOUCHLOG" maxlength="20" spellcheck="false">
+          <label for="serial">Serial number</label><input id="serial" name="serial" value="0825123146" maxlength="20" spellcheck="false">
+          <div class="field-row"><div><label for="setPoint1">Set point 1</label><input id="setPoint1" name="setPoint1" type="text" inputmode="decimal" value="2"></div><div><label for="setPoint2">Set point 2</label><input id="setPoint2" name="setPoint2" type="text" value="OFF" maxlength="8"></div></div>
+        </details>
+        <div id="form-error" class="form-error" role="alert" hidden></div>
+        <button id="generate-button" type="submit" class="button generate">Generate preview</button>
+      </form>
+    </aside>
+    <section class="preview-panel" aria-label="HTML receipt preview">
+      <span id="preview-state" class="sr-only" role="status">Not generated</span>
+      <div class="preview-controls" id="preview-controls" hidden>
+        <span id="preview-summary"></span>
+        <select id="zoom" aria-label="Preview zoom"><option value="1" selected>100%</option><option value="1.25">125%</option><option value="1.5">150%</option><option value="2">200%</option></select>
+      </div>
+      <div class="preview-scroll" id="preview-scroll">
+        <div class="empty-state" id="empty-state">No preview</div>
+        <div class="paper-stage" id="paper-stage" hidden><canvas id="receipt-canvas" width="355" height="1" role="img" aria-label="Generated receipt"></canvas></div>
+      </div>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script src="glyphs.js"></script><script src="engine.js"></script><script src="renderer.js"></script>
+</body>
+</html>

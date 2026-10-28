@@ -1,0 +1,78 @@
+{
+  "name": "receipt-studio",
+  "productName": "Receipt Studio",
+  "version": "1.0.0",
+  "description": "Synthetic temperature log generator with a continuous receipt preview and PDF export",
+  "main": "main.js",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suscabogdan/receipt-studio.git"
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "run": "electron .",
+    "test": "node --test tests/*.test.js",
+    "test:electron": "electron . --self-test",
+    "package:windows": "electron-builder --win nsis zip --x64 --publish never",
+    "package:source": "node scripts/package-windows.js"
+  },
+  "devDependencies": {
+    "electron": "44.9.1",
+    "electron-builder": "26.8.1"
+  },
+  "build": {
+    "appId": "com.receiptstudio.desktop",
+    "productName": "Receipt Studio",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "engine.js",
+      "pdf.js",
+      "glyphs.js",
+      "index.html",
+      "styles.css",
+      "package.json"
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false,
+      "requestedExecutionLevel": "asInvoker",
+      "artifactName": "Receipt-Studio-${version}-Windows-${arch}.${ext}"
+    },
+    "nsis": {
+      "artifactName": "Receipt-Studio-${version}-Setup-${arch}.${ext}",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Receipt Studio",
+      "deleteAppDataOnUninstall": false,
+      "differentialPackage": false
+    }
+  }
+}
