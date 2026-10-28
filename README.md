@@ -43,6 +43,17 @@ sudo apt-get install libgtk-3-0t64 libnss3 libasound2t64 libgbm1
 
 Package names vary by distribution. Run as a normal desktop user, not root. Do not disable Electron's sandbox to work around a permissions error. A headless server, SSH-only session or container without a display cannot open the normal desktop app.
 
+If Linux reports that the SUID sandbox helper is not configured correctly, an administrator must configure the official Electron helper in this checkout. Only do this for a checkout and downloaded runtime you trust:
+
+```sh
+npx --no-install install-electron
+sudo chown root:root node_modules/electron/dist/chrome-sandbox
+sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
+npm start
+```
+
+Reinstalling dependencies removes this configuration. The app does not run these administrator commands automatically. The Linux CI runner configures the helper explicitly and keeps sandboxing enabled.
+
 ## Use the app
 
 1. Select FINE NAME or VELTO TRANS.
