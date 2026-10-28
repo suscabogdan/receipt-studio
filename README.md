@@ -52,7 +52,7 @@ sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
 npm start
 ```
 
-Reinstalling dependencies removes this configuration. The app does not run these administrator commands automatically. The Linux CI runner configures the helper explicitly and keeps sandboxing enabled.
+Reinstalling dependencies removes this configuration. The app does not run these administrator commands automatically.
 
 ## Use the app
 
@@ -87,7 +87,7 @@ For a headless Linux CI session with Electron's libraries and Xvfb installed:
 xvfb-run -a npm run test:electron
 ```
 
-GitHub Actions runs a clean dependency install, the core tests and the Electron test on Windows, macOS and Linux for pushes and pull requests. The Actions tab records the result for each commit. Test outputs and preferences are ignored by Git. The bitmap fixture contains only numeric regression cells, not a complete source receipt.
+Tests run locally when you request them. No CI workflow is configured. Test outputs and preferences are ignored by Git. The bitmap fixture contains only numeric regression cells, not a complete source receipt.
 
 ## Source files
 
